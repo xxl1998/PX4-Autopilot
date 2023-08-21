@@ -55,7 +55,7 @@ bool px4_i2c_device_external(const uint32_t device_id)
 		device_id_baro.devid_s.bus_type = device::Device::DeviceBusType_I2C;
 		device_id_baro.devid_s.bus = 4;
 		device_id_baro.devid_s.address = 0x77;
-		device_id_baro.devid_s.devtype = DRV_BARO_DEVTYPE_MS5611;
+		device_id_baro.devid_s.devtype = DRV_BARO_DEVTYPE_SPL06;
 
 		if (device_id_baro.devid == device_id) {
 			return false;
