@@ -56,20 +56,9 @@
 
 #undef TRACE_PINS
 
-/* PX4IO connection configuration */
 
-#define BOARD_USES_PX4IO_VERSION       2
-#define PX4IO_SERIAL_DEVICE            "/dev/ttyS4"
-#define PX4IO_SERIAL_TX_GPIO           GPIO_USART6_TX
-#define PX4IO_SERIAL_RX_GPIO           GPIO_USART6_RX
-#define PX4IO_SERIAL_BASE              STM32_USART6_BASE
-#define PX4IO_SERIAL_VECTOR            STM32_IRQ_USART6
-#define PX4IO_SERIAL_TX_DMAMAP         DMAMAP_USART6_TX
-#define PX4IO_SERIAL_RX_DMAMAP         DMAMAP_USART6_RX
-#define PX4IO_SERIAL_RCC_REG           STM32_RCC_APB2ENR
-#define PX4IO_SERIAL_RCC_EN            RCC_APB2ENR_USART6EN
-#define PX4IO_SERIAL_CLOCK             STM32_PCLK2_FREQUENCY
-#define PX4IO_SERIAL_BITRATE           1500000               /* 1.5Mbps -> max rate for IO */
+#define RC_SERIAL_PORT            "/dev/ttyS4"
+
 
 /* PX4FMU GPIOs ***********************************************************************************/
 
