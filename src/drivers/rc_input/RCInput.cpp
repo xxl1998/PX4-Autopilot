@@ -449,7 +449,7 @@ void RCInput::Run()
 				_rc_scan_begin = cycle_timestamp;
 				// Configure serial port for SBUS
 				sbus_config(_rcs_fd, board_rc_singlewire(_device));
-				rc_io_invert(true);
+				rc_io_invert(true);//
 
 				// flush serial buffer and any existing buffered data
 				tcflush(_rcs_fd, TCIOFLUSH);

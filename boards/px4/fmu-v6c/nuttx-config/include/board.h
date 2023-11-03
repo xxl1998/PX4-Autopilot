@@ -416,6 +416,10 @@
 #define GPIO_SPI2_MOSI   GPIO_SPI2_MOSI_3               /* PC3  */
 #define GPIO_SPI2_SCK    ADJ_SLEW_RATE(GPIO_SPI2_SCK_5) /* PD3  */
 
+#define GPIO_SPI4_MISO   GPIO_SPI4_MISO_2               /* PE5  */
+#define GPIO_SPI4_MOSI   GPIO_SPI4_MOSI_2               /* PE6  */
+#define GPIO_SPI4_SCK    ADJ_SLEW_RATE(GPIO_SPI4_SCK_2) /* PE2  */
+
 /* I2C
  *
  *   The optional _GPIO configurations allow the I2C driver to manually

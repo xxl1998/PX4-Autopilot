@@ -105,8 +105,6 @@ __EXPORT void board_peripheral_reset(int ms)
 {
 	/* set the peripheral rails off */
 
-	VDD_5V_PERIPH_EN(false);
-	board_control_spi_sensors_power(false, 0xffff);
 
 	/* wait for the peripheral rail to reach GND */
 	usleep(ms * 1000);
@@ -115,8 +113,6 @@ __EXPORT void board_peripheral_reset(int ms)
 	/* re-enable power */
 
 	/* switch the peripheral rail back on */
-	board_control_spi_sensors_power(true, 0xffff);
-	VDD_5V_PERIPH_EN(true);
 
 }
 
@@ -200,9 +196,6 @@ __EXPORT int board_app_initialize(uintptr_t arg)
 {
 #if !defined(BOOTLOADER)
 
-	/* Power on Interfaces */
-	VDD_5V_PERIPH_EN(true);
-	VDD_5V_HIPOWER_EN(true);
 
 	/* Need hrt running before using the ADC */
 
