@@ -100,20 +100,14 @@
 	/* PA4  */  GPIO_ADC12_INP18   \
 
 /* Define Channel numbers must match above GPIO pin IN(n)*/
-#define ADC_BATTERY1_CURRENT_CHANNEL            /* PC4 */  ADC1_CH(4)
-#define ADC_BATTERY2_VOLTAGE_CHANNEL            /* PB1 */  ADC1_CH(5)
-#define ADC_BATTERY1_VOLTAGE_CHANNEL            /* PC5 */  ADC1_CH(8)
+#define ADC_BATTERY_CURRENT_CHANNEL            /* PC4 */  ADC1_CH(4)
+#define ADC_BATTERY_VOLTAGE_CHANNEL            /* PC5 */  ADC1_CH(8)
 #define ADC_HW_REV_SENSE_CHANNEL                /* PC0 */  ADC3_CH(10)
 #define ADC_HW_VER_SENSE_CHANNEL                /* PC1 */  ADC3_CH(11)
-#define ADC_BATTERY2_CURRENT_CHANNEL            /* PA2 */  ADC1_CH(14)
-#define ADC_SCALED_V5_CHANNEL                   /* PA4 */  ADC1_CH(18)
 
 #define ADC_CHANNELS \
-	((1 << ADC_BATTERY1_CURRENT_CHANNEL) | \
-	 (1 << ADC_BATTERY2_VOLTAGE_CHANNEL) | \
-	 (1 << ADC_BATTERY1_VOLTAGE_CHANNEL) | \
-	 (1 << ADC_BATTERY2_CURRENT_CHANNEL) | \
-	 (1 << ADC_SCALED_V5_CHANNEL       ))
+	((1 << ADC_BATTERY_CURRENT_CHANNEL) | \
+	 (1 << ADC_BATTERY_VOLTAGE_CHANNEL))
 
 #define HW_REV_VER_ADC_BASE STM32_ADC3_BASE
 
@@ -153,25 +147,14 @@
 /* Power supply control and monitoring GPIOs */
 
 #define GPIO_nPOWER_IN_A                /* PA15  */ (GPIO_INPUT|GPIO_PULLUP|GPIO_PORTA|GPIO_PIN15)
-#define GPIO_nPOWER_IN_B                /* PB12  */ (GPIO_INPUT|GPIO_PULLUP|GPIO_PORTB|GPIO_PIN12)
 #define GPIO_nPOWER_IN_C                /* PE15  */ (GPIO_INPUT|GPIO_PULLUP|GPIO_PORTE|GPIO_PIN15)
 
 #define GPIO_nVDD_BRICK1_VALID          GPIO_nPOWER_IN_A /* Brick 1 Is Chosen */
-#define GPIO_nVDD_BRICK2_VALID          GPIO_nPOWER_IN_B /* Brick 2 Is Chosen  */
-#define BOARD_NUMBER_BRICKS             2
+#define BOARD_NUMBER_BRICKS             1
 #define GPIO_nVDD_USB_VALID             GPIO_nPOWER_IN_C /* USB     Is Chosen */
 
-#define GPIO_VDD_5V_PERIPH_nEN          /* PE2  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_SET|GPIO_PORTE|GPIO_PIN2)
-#define GPIO_VDD_5V_PERIPH_nOC          /* PE3  */ (GPIO_INPUT |GPIO_FLOAT|GPIO_PORTE|GPIO_PIN3)
-#define GPIO_VDD_5V_HIPOWER_nEN         /* PC10 */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_SET|GPIO_PORTC|GPIO_PIN10)
-#define GPIO_VDD_5V_HIPOWER_nOC         /* PC11 */ (GPIO_INPUT |GPIO_FLOAT|GPIO_PORTC|GPIO_PIN11)
-#define GPIO_VDD_3V3_SENSORS_EN         /* PB2  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTB|GPIO_PIN2)
 
-/* Define True logic Power Control in arch agnostic form */
 
-#define VDD_5V_PERIPH_EN(on_true)          px4_arch_gpiowrite(GPIO_VDD_5V_PERIPH_nEN, !(on_true))
-#define VDD_5V_HIPOWER_EN(on_true)         px4_arch_gpiowrite(GPIO_VDD_5V_HIPOWER_nEN, !(on_true))
-#define VDD_3V3_SENSORS_EN(on_true)       px4_arch_gpiowrite(GPIO_VDD_3V3_SENSORS4_EN, (on_true))
 
 /* Tone alarm output */
 
@@ -224,11 +207,8 @@
 
 #define BOARD_ADC_SERVO_VALID     (1)
 
-#define BOARD_ADC_BRICK1_VALID  (!px4_arch_gpioread(GPIO_nVDD_BRICK1_VALID))
-#define BOARD_ADC_BRICK2_VALID  (!px4_arch_gpioread(GPIO_nVDD_BRICK2_VALID))
+#define BOARD_ADC_BRICK_VALID  (!px4_arch_gpioread(GPIO_nVDD_BRICK1_VALID))
 
-#define BOARD_ADC_PERIPH_5V_OC  (!px4_arch_gpioread(GPIO_VDD_5V_PERIPH_nOC))
-#define BOARD_ADC_HIPOWER_5V_OC (!px4_arch_gpioread(GPIO_VDD_5V_HIPOWER_nOC))
 
 
 /* This board provides a DMA pool and APIs */
@@ -247,13 +227,7 @@
 		GPIO_CAN2_RX,                     \
 		GPIO_HEATER_OUTPUT,               \
 		GPIO_nPOWER_IN_A,                 \
-		GPIO_nPOWER_IN_B,                 \
 		GPIO_nPOWER_IN_C,                 \
-		GPIO_VDD_5V_PERIPH_nEN,           \
-		GPIO_VDD_5V_PERIPH_nOC,           \
-		GPIO_VDD_5V_HIPOWER_nEN,          \
-		GPIO_VDD_5V_HIPOWER_nOC,          \
-		GPIO_VDD_3V3_SENSORS_EN,          \
 		GPIO_TONE_ALARM_IDLE,             \
 	}
 
